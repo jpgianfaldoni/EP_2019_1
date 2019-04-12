@@ -35,6 +35,8 @@ def carregar_cenarios():
             "opcoes": {
                 "inicio": "Voltar para o saguao de entrada"
             }
+        },
+        "sala de teleporte": {
         }
     }
     nome_cenario_atual = "inicio"
@@ -58,10 +60,13 @@ def main():
     game_over = False
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
+        
 
         # Aluno A: substitua este comentário pelo código para imprimir 
         # o cenário atual.
         print(cenario_atual['titulo'])
+        tamanho=len(cenario_atual['titulo'])
+        print('-'*tamanho)
         print(cenario_atual['descricao'])
 
         opcoes = cenario_atual['opcoes']
