@@ -4,6 +4,77 @@
 # João Pedro Gianfaldoni de Andrade, joaopga1@al.insper.edu.br
 # André Luís Silva Lopes, andrelsl1@al.insper.edu.br
 
+
+
+import random
+import time
+
+
+## Funcao Random Number Generation
+def rng():
+    rng = random.randint(0, 10)
+    return rng
+
+
+
+
+## Cria uma classe (em resumo isso faz com que a vida do jogador nao resete pra 100 cada vez que rodar a funcao)
+class Stats:    
+    vida = 10
+    
+    ## Funcao do combate
+    def combate(self): 
+        vidamonstro = 20 ## Como sao diferentes monstros a vida reseta cada vez q roda a funcao
+        if rng() > 3:
+            print("Você encontrou um monstro!")
+            decisao = input("Você quer lutar ou correr?:")
+            time.sleep(1)
+        
+        
+        ## Sistema de fuga
+            while decisao == "correr" and self.vida > 0:
+                if rng() < 1: ## % de chance de conseguir fugir
+                    print("Can't escape!")
+                    time.sleep(0.5)
+                    dano_no_jogador = rng() ## dano do mostro se nao conseguir fugir
+                    self.vida = self.vida - dano_no_jogador
+                    print("Você levou",dano_no_jogador, "de dano e está com", self.vida, "de vida")
+                    time.sleep(0.5)
+                    decisao = input("Você quer lutar ou correr?:")
+                    time.sleep(0.5)
+                else:
+                    print("Você fugiu")
+                    decisao = "fim"
+                
+                
+        ## Sistema de luta    
+            if decisao == "lutar":
+                while vidamonstro > 0 and self.vida > 0:
+                    dano_no_monstro = rng() # dano causado pelo jogador
+                    if dano_no_monstro == 10: ## Acerto critico
+                        print("Acerto critico! você causou" ,dano_no_monstro * 2, 
+                              "de dano no monstro!")
+                        vidamonstro = 0
+                    else:
+                        vidamonstro = vidamonstro - dano_no_monstro
+                        dano_no_jogador = rng() # dano causado pelo monstro
+                        self.vida = self.vida - dano_no_jogador
+                        print("Você levou",dano_no_jogador, "de dano e está com", self.vida, "de vida")
+                        time.sleep(0.5)
+                        if vidamonstro <= 0: ## nao deixa vida do monstro ser menor que 0
+                            vidamonstro = 0
+                            print("Você matou o monstro!") 
+                        print("Você causou" ,dano_no_monstro, "de dano no monstro, e ele esta com", 
+                              vidamonstro, "de vida")
+                        time.sleep(0.5)
+
+
+jogador = Stats()
+
+
+
+
+
 def carregar_cenarios():
     cenarios = {
         "inicio": {
@@ -60,30 +131,30 @@ def main():
     game_over = False
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
-        
-
-        # Aluno A: substitua este comentário pelo código para imprimir 
-        # o cenário atual.
-        print(cenario_atual['titulo'])
-        tamanho=len(cenario_atual['titulo'])
-        print('-'*tamanho)
-        print(cenario_atual['descricao'])
-
-        opcoes = cenario_atual['opcoes']
-        if len(opcoes) == 0:
-            print("Acabaram-se suas opções! Mwo mwo mwooooo...")
+        jogador.combate()
+        if jogador.vida <= 0:
             game_over = True
         else:
-            print("Escolha sua opção")
-            for k, v in opcoes.items():
-                print(k,":", v)
-            escolha = input("O que você quer fazer?:")
-
-            if escolha in opcoes:
-                nome_cenario_atual = escolha
-            else:
-                print("Sua indecisão foi sua ruína!")
+            print(cenario_atual['titulo'])
+            tamanho=len(cenario_atual['titulo'])
+            print('-'*tamanho)
+            print(cenario_atual['descricao'])
+    
+            opcoes = cenario_atual['opcoes']
+            if len(opcoes) == 0:
+                print("Acabaram-se suas opções! Mwo mwo mwooooo...")
                 game_over = True
+            else:
+                print("Escolha sua opção")
+                for k, v in opcoes.items():
+                    print(k,":", v)
+                escolha = input("O que você quer fazer?:")
+    
+                if escolha in opcoes:
+                    nome_cenario_atual = escolha
+                else:
+                    print("Sua indecisão foi sua ruína!")
+                    game_over = True
 
     print("Você morreu!")
 
