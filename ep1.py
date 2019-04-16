@@ -144,7 +144,7 @@ def main():
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
         jogador.combate()
-        if jogador.vida == 0:
+        if jogador.vida == 0
             game_over = True
         else:
             print(cenario_atual['titulo'])
