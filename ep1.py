@@ -9,6 +9,7 @@
 import random
 import time
 
+inventario = []
 
 ## Funcao Random Number Generation
 def rng():
@@ -16,11 +17,9 @@ def rng():
     return rng
 
 
-
-
 ## Cria uma classe (em resumo isso faz com que a vida do jogador nao resete pra 100 cada vez que rodar a funcao)
 class Stats:    
-    vida = 10
+    vida = 100
     
     ## Funcao do combate
     def combate(self): 
@@ -36,6 +35,8 @@ class Stats:
                     print("Can't escape!")
                     time.sleep(0.5)
                     dano_no_jogador = rng() ## dano do mostro se nao conseguir fugir
+                    if "Papelao" in inventario:
+                        dano_no_jogador = rng() - 2
                     self.vida = self.vida - dano_no_jogador
                     if self.vida < 0:
                         self.vida = 0
@@ -57,8 +58,12 @@ class Stats:
                               "de dano no monstro!")
                         vidamonstro = 0
                     else:
+                        if "Estilete" in inventario:
+                            dano_no_monstro += 2
                         vidamonstro = vidamonstro - dano_no_monstro
                         dano_no_jogador = rng() # dano causado pelo monstro
+                        if "Papelao" in inventario and dano_no_jogador >= 2:
+                            dano_no_jogador = dano_no_jogador - 2
                         self.vida = self.vida - dano_no_jogador
                         if self.vida < 0:
                             self.vida = 0
@@ -70,7 +75,7 @@ class Stats:
                         print("Você causou" ,dano_no_monstro, "de dano no monstro, e ele esta com", 
                               vidamonstro, "de vida")
                         time.sleep(0.5)
-
+            
 
 jogador = Stats()
 
