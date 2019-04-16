@@ -28,7 +28,6 @@ class Stats:
         if rng() > 3:
             print("Você encontrou um monstro!")
             decisao = input("Você quer lutar ou correr?:")
-            time.sleep(1)
         
         
         ## Sistema de fuga
@@ -38,6 +37,8 @@ class Stats:
                     time.sleep(0.5)
                     dano_no_jogador = rng() ## dano do mostro se nao conseguir fugir
                     self.vida = self.vida - dano_no_jogador
+                    if self.vida < 0:
+                        self.vida = 0
                     print("Você levou",dano_no_jogador, "de dano e está com", self.vida, "de vida")
                     time.sleep(0.5)
                     decisao = input("Você quer lutar ou correr?:")
@@ -59,6 +60,8 @@ class Stats:
                         vidamonstro = vidamonstro - dano_no_monstro
                         dano_no_jogador = rng() # dano causado pelo monstro
                         self.vida = self.vida - dano_no_jogador
+                        if self.vida < 0:
+                            self.vida = 0
                         print("Você levou",dano_no_jogador, "de dano e está com", self.vida, "de vida")
                         time.sleep(0.5)
                         if vidamonstro <= 0: ## nao deixa vida do monstro ser menor que 0
@@ -132,7 +135,7 @@ def main():
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
         jogador.combate()
-        if jogador.vida <= 0:
+        if jogador.vida == 0:
             game_over = True
         else:
             print(cenario_atual['titulo'])
