@@ -9,7 +9,7 @@
 import random
 import time
 
-inventario = []
+inventario = ["Papelao"]
 
 ## Funcao Random Number Generation
 def rng():
@@ -35,7 +35,9 @@ class Stats:
                     print("Can't escape!")
                     time.sleep(0.5)
                     dano_no_jogador = rng() ## dano do mostro se nao conseguir fugir
-                    if "Papelao" in inventario:
+                    if "Fone do Pelicano" in inventario:
+                        dano_no_jogador = 0
+                    elif "Papelao" in inventario:
                         dano_no_jogador = dano_no_jogador - 2
                     self.vida = self.vida - dano_no_jogador
                     if self.vida < 0:
@@ -62,7 +64,9 @@ class Stats:
                             dano_no_monstro += 2
                         vidamonstro = vidamonstro - dano_no_monstro
                         dano_no_jogador = rng() # dano causado pelo monstro
-                        if "Papelao" in inventario and dano_no_jogador >= 2:
+                        if "Fone do Pelicano" in inventario:
+                            dano_no_jogador = 0
+                        elif "Papelao" in inventario and dano_no_jogador >= 2:
                             dano_no_jogador = dano_no_jogador - 2
                         self.vida = self.vida - dano_no_jogador
                         if self.vida < 0:
