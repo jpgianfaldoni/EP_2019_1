@@ -36,7 +36,7 @@ class Stats:
                     time.sleep(0.5)
                     dano_no_jogador = rng() ## dano do mostro se nao conseguir fugir
                     if "Papelao" in inventario:
-                        dano_no_jogador = rng() - 2
+                        dano_no_jogador = dano_no_jogador - 2
                     self.vida = self.vida - dano_no_jogador
                     if self.vida < 0:
                         self.vida = 0
