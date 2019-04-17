@@ -39,12 +39,11 @@ def itens_no_cenario(nome_do_cenario): #chamada tem que ser uma chave de um dici
            'Andar do Professor':{'Caneta do Raul':'Zera qualquer dano de vida passivo','Pendrive da Punição':'Tira 2 pontos de vida a cada rodada','Mapa para o livro da salvação':'Mapa'},
            'Biblioteca':{'Livro da salvação': 'Recebe 5 pontos de vida a cada rodada','Fone do Pelicano':'Te deixa imortal'},
            'Fab Lab':{'Estilete':'+2 de dano','Escudo de Papelão':'Toma -2 de dano'}}
-    
     for k,v, in objetos.items():
-        if nome_do_cenario==k:
-            return v
-        else:
-            return 'Nenhum objeto'
+        if nome_do_cenario == k:
+            print(v)
+    if nome_do_cenario not in objetos.keys():
+        print("Nenhum Objeto")
         
 #### função carregar cenarios
             
