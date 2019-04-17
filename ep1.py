@@ -139,38 +139,63 @@ def main():
     print()
 
     cenarios, nome_cenario_atual = carregar_cenarios()
-
     game_over = False
-    while not game_over:
-        cenario_atual = cenarios[nome_cenario_atual]
-        jogador.combate()
-        if jogador.vida == 0:
-            game_over = True
-        else:
-            print(cenario_atual['titulo'])
-            tamanho=len(cenario_atual['titulo'])
-            print('-'*tamanho)
-            print(cenario_atual['descricao'])
+
+
+    cenario_atual = cenarios[nome_cenario_atual]
+    print(cenario_atual['titulo'])
+    tamanho=len(cenario_atual['titulo'])
+    print('-'*tamanho)
+    print(cenario_atual['descricao'])
     
-            opcoes = cenario_atual['opcoes']
-            if len(opcoes) == 0:
-                print("Acabaram-se suas opções! Mwo mwo mwooooo...")
+    opcoes = cenario_atual['opcoes']
+    if len(opcoes) == 0:
+        print("Acabaram-se suas opções! Mwo mwo mwooooo...")
+        game_over = True
+    else:
+        print("Escolha sua opção")
+        for k, v in opcoes.items():
+            print(k,":", v)
+        escolha = input("O que você quer fazer?:")
+                
+        if escolha in opcoes:
+            nome_cenario_atual = escolha
+        else:
+            print("Sua indecisão foi sua ruína!")
+            game_over = True
+                        
+    if game_over == True:
+        print("Você morreu!")
+    else:
+        while not game_over:
+            cenario_atual = cenarios[nome_cenario_atual]
+            jogador.combate()
+            if jogador.vida == 0:
                 game_over = True
             else:
-                print("Escolha sua opção")
-                for k, v in opcoes.items():
-                    print(k,":", v)
-                escolha = input("O que você quer fazer?:")
+                print(cenario_atual['titulo'])
+                tamanho=len(cenario_atual['titulo'])
+                print('-'*tamanho)
+                print(cenario_atual['descricao'])
     
-                if escolha in opcoes:
-                    nome_cenario_atual = escolha
-                else:
-                    print("Sua indecisão foi sua ruína!")
+                opcoes = cenario_atual['opcoes']
+                if len(opcoes) == 0:
+                    print("Acabaram-se suas opções! Mwo mwo mwooooo...")
                     game_over = True
+                else:
+                    print("Escolha sua opção")
+                    for k, v in opcoes.items():
+                        print(k,":", v)
+                    escolha = input("O que você quer fazer?:")
+    
+                    if escolha in opcoes:
+                        nome_cenario_atual = escolha
+                    else:
+                        print("Sua indecisão foi sua ruína!")
+                        game_over = True
 
     print("Você morreu!")
-
-
+    
 # Programa principal.
 if __name__ == "__main__":
     main()
