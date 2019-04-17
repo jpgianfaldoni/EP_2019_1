@@ -81,7 +81,7 @@ def main():
         ecolha=input('Quer entrar nessa aventura?')
         if escolha=='sim':                                  #########lembrar de colocar else
                 inicio=carregar_cenarios('saguao')
-                if inicio=='cenario1':
+                while inicio=='cenario1':
                     print('Nessa sala temos esses itens:')
                     print(itens_no_cenario('Saguão do Perigo'))
                     print('O número sorteado no dado foi',dado)
@@ -94,7 +94,11 @@ def main():
                         print('Você encontrou a chave da sala do Raul')
                         print('Use a com sabedoria')
                         
-                opcoes=input()        
+                    inicio=''
+                opcoes=input('Deseja ir para outro lugar?')
+                if opcoes=='sim':
+                    print(')
+                
                         
                         
                         
