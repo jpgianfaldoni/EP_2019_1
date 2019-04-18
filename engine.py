@@ -11,6 +11,7 @@ import time
 
 inventario = ["Papelao"]
 
+
 ## Funcao Random Number Generation
 def rng():
     rng = random.randint(0, 10)
@@ -20,6 +21,42 @@ def rng():
 ## Cria uma classe (em resumo isso faz com que a vida do jogador nao resete pra 100 cada vez que rodar a funcao)
 class Stats:    
     vida = 100
+    
+    def combate_raul(self): 
+        vidaraul = 50 ## Como sao diferentes monstros a vida reseta cada vez q roda a funcao
+        if rng() > 0:
+            print("Voce encontrou seu ultimo desafio: Raul, o Mestre do Python")
+            time.sleep(0.5)
+            print("Não há escapatória, DP não é mais uma opção, lutem até a MORTE!")
+            while vidaraul > 0 and self.vida > 0:
+                dano_no_monstro = rng() # dano causado pelo jogador
+                if dano_no_monstro == 10: ## Acerto critico
+                    print("Acerto critico! Pena que o mestre do python é imune a dano extra..")
+                    vidaraul = vidaraul - dano_no_monstro
+                else:
+                    if "Estilete" in inventario:
+                        dano_no_monstro += 2
+                    vidaraul = vidaraul - dano_no_monstro
+                    dano_no_jogador = rng() # dano causado pelo monstro
+                    if "Fone do Pelicano" in inventario:
+                        dano_no_jogador = 0
+                    elif "Papelao" in inventario and dano_no_jogador >= 2:
+                        dano_no_jogador = dano_no_jogador - 2
+                    self.vida = self.vida - dano_no_jogador
+                    if self.vida < 0:
+                        self.vida = 0
+                    print("Você levou",dano_no_jogador, "de dano e está com", self.vida, "de vida")
+                    time.sleep(0.5)
+                    if vidaraul <= 0: ## nao deixa vida do monstro ser menor que 0
+                        vidaraul = 0
+                        print("Você venceu!") 
+                        ganhou = True
+                    else:
+                        print("Você causou" ,dano_no_monstro, "de dano no Raul, e ele esta com", 
+                          vidaraul, "de vida")
+                    time.sleep(0.5)
+            
+
     
     ## Funcao do combate
     def combate(self): 
@@ -85,7 +122,6 @@ jogador = Stats()
 
 
 
-#criando algumas "salas"/cenarios
 
 
 #criando dado
@@ -95,7 +131,7 @@ def dado():
 
 
 
-#itens                                      ####sala de teleporte = aquario
+#itens                                     
 
 mapa_da_DP=5
 caneta_do_Raul=0
@@ -111,9 +147,9 @@ game_over=False
 ###função itens
 
 def itens_no_cenario(nome_do_cenario): 
-    objetos={'saguao':{'Mapa da DP':'Tira 5 pontos de vida a cada rodada','Chave da sala do Raul':'Permite entrar na sala do Raul'},
+    objetos={'saguao':{'Mapa da DP':'Tira 5 pontos de vida a cada rodada'},
            'sala do raul':{'Caneta do Raul':'Zera qualquer dano de vida passivo','Pendrive da Punição':'Tira 2 pontos de vida a cada rodada'},
-           'biblioteca':{'Livro da salvação': 'Recebe 5 pontos de vida a cada rodada','Fone do Pelicano':'Te deixa imortal'},
+           'biblioteca':{'Chave da sala do Raul':'Permite entrar na sala do Raul','Livro da salvação': 'Recebe 5 pontos de vida a cada rodada','Fone do Pelicano':'Te deixa imortal'},
            'fab lab':{'Estilete':'+2 de dano','Escudo de Papelão':'Toma -2 de dano'}}
     
     for k,v, in objetos.items():
@@ -134,14 +170,16 @@ def carregar_cenarios(nome):
             return carrega
 
 def main():
+    time.sleep(1)
     print("MUITO IMPORTANTE!")
-    print()
+    time.sleep(1)
     print("Por favor, meu consagrado...")
+    time.sleep(1)
     print("Ao longo do jogo, digite TUDO com letra minúscula e sem acento")
-    print()
+    time.sleep(1)
     print("Aproveite a experiência e não se esqueça...")
     print("Se o EP já está difícil, imagina a PF...")
-    print()
+    time.sleep(1)
     print()
     print("Na hora do sufoco!")
     print("------------------")
@@ -169,13 +207,10 @@ def main():
             numero_dado=dado()
             print('O número sorteado no dado foi',numero_dado)
             if numero_dado<=7:
-                inventario.append('Mapa da DP')
-                print('Você encontrou o Mapa da DP')       
-                print('-5 de vida a cada rodada')
-            elif numero_dado>=15:
-                inventario.append('Chave da sala do Raul')
-                print('Você encontrou a chave da sala do Raul')
-                print('Use-a com sabedoria')
+                if "Mapa da DP" not in inventario:
+                    inventario.append('Mapa da DP')
+                    print('Você encontrou o Mapa da DP')       
+                    print('-5 de vida a cada rodada')
             print('''Você tem essas opções de lugares para ir: 1- Sujinhuus 2- Fab Lab''')
             opcoes=input('Qual desses lugares você quer ir? ')
             if opcoes=='sujinhuus':
@@ -201,13 +236,12 @@ def main():
                     numero_dado=dado()
                     print('O número sorteado no dado foi',numero_dado)
                     if numero_dado<=7:
-                        inventario.append('Mapa da DP')
-                        print('Você encontrou o Mapa da DP')       
-                        print('-5 de vida a cada rodada')
-                    elif numero_dado>=12:
-                        inventario.append('Chave da sala do Raul')
-                        print('Você encontrou a chave da sala do Raul')
-                        print('Use a com sabedoria')
+                        if "Mapa da DP" not in inventario:
+                            inventario.append('Mapa da DP')
+                            print('Você encontrou o Mapa da DP')       
+                            print('-5 de vida a cada rodada')
+                    elif numero_dado > 7:
+                        print("Que azar! Você não encontrou nenhum item")
                     print('''Você tem essas opções de lugares para ir: 1- Sujinhuus 2- Fab Lab''')
                     opcoes=input('Qual desses lugares você quer ir? ')
                     if opcoes=='sujinhuus':
@@ -225,18 +259,14 @@ def main():
                     if 'Chave da sala do Raul' not in inventario:
                         print('Você não consegue entrar na Sala do Raul, ainda falta um item para ser encontrado')
                     else:
-                        print('Nessa sala temos esses itens:')
-                        print(itens_no_cenario('sala do raul'))
-                        numero_dado=dado()
-                        print('O número sorteado no dado foi',numero_dado)
-                        if numero_dado>=15:
-                            inventario.append('Caneta do Raul')
-                            print('Você foi abençoado com a caneta do Raul')
-                            print('Hit Marker foi ZERADO')
-                        elif numero_dado<=10:
-                            inventario.append('Pendrive da Punição')
-                            print('Você irritou o MESTRE DO PYTHON')
-                            print('Por isso foi amaldiçoado com -2 pontos de vida a cada rodada')
+                        resposta = input('Voce tem certeza que quer entrar? Pode ser um caminho sem volta(sim/nao)')
+                        if resposta == "sim":
+                            ganhou = True
+                            jogador.combate_raul()
+                            break
+                        else:
+                            print('''Você tem essas opções de lugares para ir: 1- Sujinhuus 2- Fab Lab''')
+                            opcoes=input('Qual desses lugares você quer ir? ')
                     print('''Você tem essas opções de lugares para ir: 1- Fab Lab 2- Biblioteca''')
                     opcoes=input('Qual desses lugares você quer ir? ')
                     if opcoes=='fab lab':
@@ -256,15 +286,24 @@ def main():
                     numero_dado=dado()
                     print('O número sorteado no dado foi',numero_dado)
                     if 'Mapa para o livro da Salvação' in inventario:
-                        inventario.append('Livro da Salvação')
-                        print('Buscando um milagre.... e com o mapa em mãos Você encontrou o Livro da Salvação')
-                        print('Com todo o conhecimento vindo do livro, você será premiado com +5 pontos de vida a cada rodada')
-                    elif numero_dado>=16:
-                        print('Não é possível...')
-                        print('Você encontrou o Fone do Pelicano')
-                        print('Agora você está mais forte do que o GOKU!')
-                        print('Você está IMORTAL')
-                        inventario.append('Fone do Pelicano')
+                        if 'Livro da Salvação' not in inventario:
+                            inventario.append('Livro da Salvação')
+                            print('Buscando um milagre.... e com o mapa em mãos Você encontrou o Livro da Salvação')
+                            print('Com todo o conhecimento vindo do livro, você será premiado com +5 pontos de vida a cada rodada')
+                    if numero_dado <=18:
+                        if 'Chave da sala do Raul' not in inventario:
+                            inventario.append('Chave da sala do Raul')
+                            print('Você encontrou a chave da sala do Raul')
+                            print('Use a com sabedoria')
+                    if numero_dado>=19:
+                        if 'Fone do Pelicano' not in inventario:
+                            print('Não é possível...')
+                            print('Você encontrou o Fone do Pelicano')
+                            print('Agora você está mais forte do que o GOKU!')
+                            print('Você está IMORTAL')
+                            inventario.append('Fone do Pelicano')
+                    elif numero_dado < 19 and numero_dado > 18:
+                        print("Que azar! Você não encontrou nenhum item")
                     print('Você tem essas opções de lugares para ir: 1- Sala do Raul 2- Fab Lab 3- Aquário')
                     opcoes=input('Qual desses lugares você quer ir?  ')
                     if opcoes=='sala do raul':
@@ -286,37 +325,15 @@ def main():
                     numero_dado=dado()
                     print('O número sorteado no dado foi',numero_dado)
                     if numero_dado>=7:
-                        inventario.append('Estilete')
-                        inventario.append('Papelão')
-                        print('Você ganhou o estilete')
-                        print('Dano recebe +2 pontos')
-                        print('Você ganhou um escudo de papelão')
-                        print('Recebe -2 pontos de dano')
-                    print('''Você tem essas opções de lugares para ir: 1- Biblioteca 2- Sala do Raul''')
-                    opcoes=input('Qual desses lugares você quer ir? ')
-                    if opcoes=='biblioteca':
-                        inicio=carregar_cenarios('biblioteca')
-                    elif opcoes=='sala do raul':
-                        inicio=carregar_cenarios('sala do raul')
-                    else:
-                        game_over=True
-                        print('Digitou errado! WASTED!')
-                elif inicio=='cenario4':
-                    print('Fab Lab')
-                    tamanho=len('Fab Lab')
-                    print('-'*tamanho)
-                    print('Você está no Fab Lab do Insper')
-                    print('Nessa sala temos esses itens:')
-                    print(itens_no_cenario('fab lab'))
-                    numero_dado=dado()
-                    print('O número sorteado no dado foi',numero_dado)
-                    if numero_dado>=7:
-                        inventario.append('Estilete')
-                        inventario.append('Papelão')
-                        print('Você ganhou o estilete')
-                        print('Dano recebe +2 pontos')
-                        print('Você ganhou um escudo de papelão')
-                        print('Recebe -2 pontos de dano')
+                        if 'Estilete' not in inventario and 'Papelão' not in inventario:
+                            inventario.append('Estilete')
+                            inventario.append('Papelão')
+                            print('Você ganhou o estilete')
+                            print('Dano recebe +2 pontos')
+                            print('Você ganhou um escudo de papelão')
+                            print('Recebe -2 pontos de dano')
+                    if numero_dado < 7:
+                        print("Que azar! Você não encontrou nenhum item")
                     print('''Você tem essas opções de lugares para ir: 1- Biblioteca 2- Sala do Raul''')
                     opcoes=input('Qual desses lugares você quer ir? ')
                     if opcoes=='biblioteca':
