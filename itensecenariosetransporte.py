@@ -5,6 +5,77 @@ Created on Mon Apr 15 11:43:10 2019
 @author: André Luis Silva Lop
 """
 import random
+import time
+def rng():
+    rng = random.randint(0, 10)
+    return rng
+
+
+## Cria uma classe (em resumo isso faz com que a vida do jogador nao resete pra 100 cada vez que rodar a funcao)
+class Stats:    
+    vida = 100
+    
+    ## Funcao do combate
+    def combate(self): 
+        vidamonstro = 20 ## Como sao diferentes monstros a vida reseta cada vez q roda a funcao
+        if rng() > 3:
+            print("Você encontrou um monstro!")
+            decisao = input("Você quer lutar ou correr?:")
+        
+        
+        ## Sistema de fuga
+            while decisao == "correr" and self.vida > 0:
+                if rng() < 1: ## % de chance de conseguir fugir
+                    print("Can't escape!")
+                    time.sleep(0.5)
+                    dano_no_jogador = rng() ## dano do mostro se nao conseguir fugir
+                    if "Fone do Pelicano" in inventario:
+                        dano_no_jogador = 0
+                    elif "Papelao" in inventario:
+                        dano_no_jogador = dano_no_jogador - 2
+                    self.vida = self.vida - dano_no_jogador
+                    if self.vida < 0:
+                        self.vida = 0
+                    print("Você levou",dano_no_jogador, "de dano e está com", self.vida, "de vida")
+                    time.sleep(0.5)
+                    decisao = input("Você quer lutar ou correr?:")
+                    time.sleep(0.5)
+                else:
+                    print("Você fugiu")
+                    decisao = "fim"
+                
+                
+        ## Sistema de luta    
+            if decisao == "lutar":
+                while vidamonstro > 0 and self.vida > 0:
+                    dano_no_monstro = rng() # dano causado pelo jogador
+                    if dano_no_monstro == 10: ## Acerto critico
+                        print("Acerto critico! você causou" ,dano_no_monstro * 2, 
+                              "de dano no monstro!")
+                        vidamonstro = 0
+                    else:
+                        if "Estilete" in inventario:
+                            dano_no_monstro += 2
+                        vidamonstro = vidamonstro - dano_no_monstro
+                        dano_no_jogador = rng() # dano causado pelo monstro
+                        if "Fone do Pelicano" in inventario:
+                            dano_no_jogador = 0
+                        elif "Papelao" in inventario and dano_no_jogador >= 2:
+                            dano_no_jogador = dano_no_jogador - 2
+                        self.vida = self.vida - dano_no_jogador
+                        if self.vida < 0:
+                            self.vida = 0
+                        print("Você levou",dano_no_jogador, "de dano e está com", self.vida, "de vida")
+                        time.sleep(0.5)
+                        if vidamonstro <= 0: ## nao deixa vida do monstro ser menor que 0
+                            vidamonstro = 0
+                            print("Você matou o monstro!") 
+                        print("Você causou" ,dano_no_monstro, "de dano no monstro, e ele esta com", 
+                              vidamonstro, "de vida")
+                        time.sleep(0.5)
+            
+
+jogador = Stats()
 
 
 #criando algumas "salas"/cenarios
@@ -41,10 +112,10 @@ def itens_no_cenario(nome_do_cenario): #chamada tem que ser uma chave de um dici
            'Fab Lab':{'Estilete':'+2 de dano','Escudo de Papelão':'Toma -2 de dano'}}
     
     for k,v, in objetos.items():
-        if nome_do_cenario==k:
-            return v
-        else:
-            return 'Nenhum objeto'
+        if nome_do_cenario == k:
+            print(v)
+    if nome_do_cenario not in objetos.keys():
+        print("Nenhum Objeto")
         
 #### função carregar cenarios
             
@@ -78,60 +149,60 @@ def main():
         tamanho=len('Saguao')
         print('-'*tamanho)
         print('Você está no saguão do insper')
-        ecolha=input('Quer entrar nessa aventura?')
+        escolha=input('Quer entrar nessa aventura?')
         if escolha=='sim':                                  #########lembrar de colocar else
-                inicio=carregar_cenarios('saguao')
-                while inicio=='cenario1':
-                    print('Nessa sala temos esses itens:')
-                    print(itens_no_cenario('Saguão do Perigo'))
-                    numero_dado=dado()
-                    print('O número sorteado no dado foi',numero_dado)
-                    if numero_dado<=7:
-                        inventario.append('Mapa da DP')
-                        print('Você encontrou o Mapa da DP')        ###### condições de dado
-                        print('-5 de vida a cada rodada')
-                    elif numero_dado>=12:
-                        inventario.append('Chave da sala do Raul')
-                        print('Você encontrou a chave da sala do Raul')
-                        print('Use a com sabedoria')
-                        
-                    inicio=''
+            inicio=carregar_cenarios('saguao')
+            while inicio=='cenario1':
+                print('Nessa sala temos esses itens:')
+                print(itens_no_cenario('Saguão do Perigo'))
+                numero_dado=dado()
+                print('O número sorteado no dado foi',numero_dado)
+                if numero_dado<=7:
+                    inventario.append('Mapa da DP')
+                    print('Você encontrou o Mapa da DP')        ###### condições de dado
+                    print('-5 de vida a cada rodada')
+                elif numero_dado>=12:
+                    inventario.append('Chave da sala do Raul')
+                    print('Você encontrou a chave da sala do Raul')
+                    print('Use a com sabedoria')
+                    
+                inicio=''
                 print('''Você tem essas opções de lugares para ir: 1- Sujinhuus
                                                                  2- Fab Lab''')
-                opcoes=input('Qual desses lugares você quer ir?')
-                if opcoes=='sujinhuus':
-                    jogador.combate()
-                    if jogador.vida==0:
-                        game_over=True
-                    else:
-                        inicio=carregar_cenarios('sujinhuus')
-                        if inicio == 'Cenario5':
-                            alcool = 0
-                            print('Bem vindo ao Sujinhuus! Vamos te apresentar as nossas opções de bebida:')
-                            print('litrão nosso de todo dia')
-                            print('corote do amor')
-                            print('caipirinha do role')
-                            escolha = input('Vai querer tomar alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
-                            while escolha != 'ir embora':
-                                if escolha == 'litrão nosso de todo dia':
-                                    alcool += 1
-                                    escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
-                                elif escolha == 'corote do amor':
-                                    alcool += 1
-                                    escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
-                                elif escolha == 'caipirinha do role':
-                                    alcool +=1
-                                    escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
-                                else:
-                                    print('Não temos isso, perdeu a chance de pedir! Vai ter que ir embora.')
-                                    escolha == 'ir embora'
-                            if alcool > 0:
-                               print('Você não pode voltar ao Insper tendo bebido!')
-                               game_over = True
-                            
+            opcoes=input('Qual desses lugares você quer ir?')
+            if opcoes=='sujinhuus':
+                jogador.combate()
+            if jogador.vida==0:
+                game_over=True
+            else:
+                inicio=carregar_cenarios('sujinhuus')
+                if inicio == 'Cenario5':
+                    alcool = 0
+                    print('Bem vindo ao Sujinhuus! Vamos te apresentar as nossas opções de bebida:')
+                    print('litrão nosso de todo dia')
+                    print('corote do amor')
+                    print('caipirinha do role')
+                    escolha = input('Vai querer tomar alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
+                    while escolha != 'ir embora':
+                        if escolha == 'litrão nosso de todo dia':
+                            alcool += 1
+                            escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
+                        elif escolha == 'corote do amor':
+                            alcool += 1
+                            escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
+                        elif escolha == 'caipirinha do role':
+                            alcool +=1
+                            escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
+                        else:
+                            print('Não temos isso, perdeu a chance de pedir! Vai ter que ir embora.')
+                            escolha == 'ir embora'
+                        if alcool > 0:
+                            print('Você não pode voltar ao Insper tendo bebido!')
+                            game_over = True
+                        
                             ##### opcoes='nao'
                     
-                elif opcoes=='fab lab':
+                elif opcoes=='Fab Lab':
                     jogador.combate()
                     if jogador.vida==0:
                         game_over=True
@@ -191,7 +262,7 @@ def main():
                         
                         
                         
-            elif cenario_atual=='andar professor': #acontecimentos andar do professor
+            if cenario_atual=='andar professor': #acontecimentos andar do professor
                 if 'Chave da sala do Raul' not in inventario:
                     print('Você não consegue entrar na sala do Raul')
                 else:
@@ -255,6 +326,7 @@ def main():
             visualizar=input('Você quer visualizar seu inventário?')
             if visualizar=='sim':
                 print(inventario)
+                game_over = True
                 
                 
                 
