@@ -1,0 +1,1 @@
+{"saguao": {"Mapa da DP": "Tira 5 pontos de vida a cada rodada"}, "biblioteca": {"Chave da sala do Raul": "Permite entrar na sala do Raul", "Livro da salvação": "Recebe 5 pontos de vida a cada rodada", "Fone do Pelicano": "Te deixa imortal"}, "fab lab": {"Estilete": "+2 de dano", "Escudo de Papelão": "Toma -2 de dano"}}

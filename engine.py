@@ -1,5 +1,4 @@
-f#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 """
 Created on Wed Apr 17 19:18:56 2019
 
@@ -8,8 +7,11 @@ Created on Wed Apr 17 19:18:56 2019
 
 import random
 import time
+import json
+from pprint import pprint
 
-inventario = ["Papelao"]
+
+inventario = []
 
 
 ## Funcao Random Number Generation
@@ -18,12 +20,11 @@ def rng():
     return rng
 
 
-## Cria uma classe (em resumo isso faz com que a vida do jogador nao resete pra 100 cada vez que rodar a funcao)
 class Stats:    
     vida = 100
     
     def combate_raul(self): 
-        vidaraul = 50 ## Como sao diferentes monstros a vida reseta cada vez q roda a funcao
+        vidaraul = 50 
         if rng() > 0:
             print("Voce encontrou seu ultimo desafio: Raul, o Mestre do Python")
             time.sleep(0.5)
@@ -147,14 +148,12 @@ game_over=False
 ###função itens
 
 def itens_no_cenario(nome_do_cenario): 
-    objetos={'saguao':{'Mapa da DP':'Tira 5 pontos de vida a cada rodada'},
-           'sala do raul':{'Caneta do Raul':'Zera qualquer dano de vida passivo','Pendrive da Punição':'Tira 2 pontos de vida a cada rodada'},
-           'biblioteca':{'Chave da sala do Raul':'Permite entrar na sala do Raul','Livro da salvação': 'Recebe 5 pontos de vida a cada rodada','Fone do Pelicano':'Te deixa imortal'},
-           'fab lab':{'Estilete':'+2 de dano','Escudo de Papelão':'Toma -2 de dano'}}
-    
-    for k,v, in objetos.items():
-        if nome_do_cenario==k:
-            return v
+    with open('texto_cenarios.txt','r') as arquivo:
+        conteudo = arquivo.read()
+        objetos = json.loads(conteudo)
+        for k,v, in objetos.items():
+            if nome_do_cenario==k:
+                return v
         
         
 #### função carregar cenarios
@@ -213,6 +212,8 @@ def main():
                     inventario.append('Mapa da DP')
                     print('Você encontrou o Mapa da DP')       
                     print('-5 de vida a cada rodada')
+            elif numero_dado > 7:
+                print("Que azar! Você não encontrou nenhum item")
             print('''Você tem essas opções de lugares para ir: 1- Sujinhuus 2- Fab Lab''')
             opcoes=input('Qual desses lugares você quer ir? ')
             if opcoes=='sujinhuus':
@@ -238,8 +239,8 @@ def main():
                     print('Nessa sala temos esses itens:')
                     print(itens_no_cenario('saguao'))
                     numero_dado=dado()
-                    print('O número sorteado no dado foi',numero_dado)
-                    if numero_dado<=7:
+                    print('O número sorteado no dado foi', numero_dado)
+                    if numero_dado <= 7:
                         if "Mapa da DP" not in inventario:
                             inventario.append('Mapa da DP')
                             print('Você encontrou o Mapa da DP')       
@@ -267,8 +268,11 @@ def main():
                     else:
                         resposta = input('Voce tem certeza que quer entrar? Pode ser um caminho sem volta(sim/nao) ')
                         if resposta == "sim":
-                            ganhou = True
                             jogador.combate_raul()
+                            if jogador.vida > 0:
+                                ganhou = True
+                            else: 
+                                game_over = True
                             break
                         else:
                             print('''Você tem essas opções de lugares para ir: 1- Sujinhuus 2- Fab Lab''')
