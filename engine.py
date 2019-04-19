@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+f#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Wed Apr 17 19:18:56 2019
@@ -172,14 +172,14 @@ def carregar_cenarios(nome):
 def main():
     time.sleep(1)
     print("MUITO IMPORTANTE!")
-    time.sleep(1)
+    time.sleep(2)
     print("Por favor, meu consagrado...")
-    time.sleep(1)
+    time.sleep(2)
     print("Ao longo do jogo, digite TUDO com letra minúscula e sem acento")
-    time.sleep(1)
+    time.sleep(2)
     print("Aproveite a experiência e não se esqueça...")
     print("Se o EP já está difícil, imagina a PF...")
-    time.sleep(1)
+    time.sleep(2)
     print()
     print("Na hora do sufoco!")
     print("------------------")
@@ -198,6 +198,8 @@ def main():
     while not game_over:
         if i == 0:
             inicio=carregar_cenarios('saguao')
+            print()
+            print()
             print('Saguão')
             tamanho=len('Saguao')
             print('-'*tamanho)
@@ -227,6 +229,8 @@ def main():
                 game_over=True
             else:
                 if inicio=='cenario1':
+                    print()
+                    print()
                     print('Saguão')
                     tamanho=len('Saguao')
                     print('-'*tamanho)
@@ -252,6 +256,8 @@ def main():
                         game_over=True
                         print('Digitou errado! WASTED!')
                 elif inicio=='cenario2':
+                    print()
+                    print()
                     print('Sala do Raul')
                     tamanho=len('Sala do Raul')
                     print('-'*tamanho)
@@ -259,7 +265,7 @@ def main():
                     if 'Chave da sala do Raul' not in inventario:
                         print('Você não consegue entrar na Sala do Raul, ainda falta um item para ser encontrado')
                     else:
-                        resposta = input('Voce tem certeza que quer entrar? Pode ser um caminho sem volta(sim/nao)')
+                        resposta = input('Voce tem certeza que quer entrar? Pode ser um caminho sem volta(sim/nao) ')
                         if resposta == "sim":
                             ganhou = True
                             jogador.combate_raul()
@@ -277,6 +283,8 @@ def main():
                         game_over=True
                         print('Digitou errado! WASTED!')
                 elif inicio=='cenario3':
+                    print()
+                    print()
                     print('Biblioteca')
                     tamanho=len('Biblioteca')
                     print('-'*tamanho)
@@ -316,6 +324,8 @@ def main():
                         game_over=True
                         print('Digitou errado! WASTED!')
                 elif inicio=='cenario4':
+                    print()
+                    print()
                     print('Fab Lab')
                     tamanho=len('Fab Lab')
                     print('-'*tamanho)
@@ -345,6 +355,8 @@ def main():
                         print('Digitou errado! WASTED!')
                 elif inicio=='cenario5':
                     alcool = 0
+                    print()
+                    print()
                     print('Bem vindo ao Sujinhuus! Vamos te apresentar as nossas opções de bebida:')
                     print('-litrão nosso de todo dia')
                     print('-corote do amor')
@@ -369,6 +381,8 @@ def main():
                     else:
                         inicio=carregar_cenarios('saguao')
                 elif inicio=='cenario6':
+                    print()
+                    print()
                     print('Aquário')
                     tamanho=len('Aquário')
                     print('-'*tamanho)
