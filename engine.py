@@ -8,7 +8,6 @@ Created on Wed Apr 17 19:18:56 2019
 import random
 import time
 import json
-from pprint import pprint
 from PIL import Image
 
 
@@ -180,14 +179,16 @@ def main():
     time.sleep(2)
     print("Aproveite a experiência e não se esqueça...")
     print("Se o EP já está difícil, imagina a PF...")
-    time.sleep(2)
+    time.sleep(3)
     print()
     print("Na hora do sufoco!")
     print("------------------")
     print()
+    time.sleep(1.5)
     print("Parecia uma boa idéia: vou só jogar um pouquinho/assistir Netflix/"
         "embaçar em geral. Amanhã eu começo o EP. Mas isso não deu certo...")
     print()
+    time.sleep(4)
     print("É o dia de entregar o EP e você está muuuuito atrasado! Você está "
         "na entrada do Insper, e quer procurar o professor para pedir um "
         "adiamento do EP (boa sorte...)")
@@ -199,13 +200,14 @@ def main():
     while not game_over:
         if i == 0:
             inicio=carregar_cenarios('saguao')
+            time.sleep(6)
             print()
             print()
             print('Saguão')
             tamanho=len('Saguao')
             print('-'*tamanho)
             print('Você está no saguão do Insper')
-            time.sleep(1)
+            time.sleep(2)
             print('Nessa sala temos esses itens:')
             time.sleep(2)
             print(itens_no_cenario('saguao'))
@@ -258,9 +260,10 @@ def main():
                             inventario.append('Mapa da DP')
                             print('Você encontrou o Mapa da DP')       
                             print('-5 de vida a cada rodada')
-                            time.sleep(2)
+                            time.sleep(3)
                     elif numero_dado > 7:
                         print("Que azar! Você não encontrou nenhum item")
+                        time.sleep(2)
                     print('''Você tem essas opções de lugares para ir: 
 1- Sujinhuus 
 2- Fab Lab''')
@@ -319,15 +322,16 @@ def main():
                     print('Nessa sala temos esses itens:')
                     time.sleep(2)
                     print(itens_no_cenario('biblioteca'))
-                    time.sleep(2)
+                    time.sleep(3.5)
                     numero_dado=dado()
                     print('O número sorteado no dado foi',numero_dado)
                     if 'Mapa para o livro da Salvação' in inventario:
                         if 'Livro da Salvação' not in inventario:
                             inventario.append('Livro da Salvação')
                             print('Buscando um milagre.... e com o mapa em mãos Você encontrou o Livro da Salvação')
+                            time.sleep(2.5)
                             print('Com todo o conhecimento vindo do livro, você será premiado com +5 pontos de vida a cada rodada')
-                            time.sleep(2)
+                            time.sleep(3)
                     if numero_dado <=18:
                         if 'Chave da sala do Raul' not in inventario:
                             inventario.append('Chave da sala do Raul')
@@ -337,10 +341,13 @@ def main():
                     if numero_dado>=19:
                         if 'Fone do Pelicano' not in inventario:
                             print('Não é possível...')
+                            time.sleep(1)
                             print('Você encontrou o Fone do Pelicano')
+                            time.sleep(1.5)
                             print('Agora você está mais forte do que o GOKU!')
+                            time.sleep(1.5)
                             print('Você está IMORTAL')
-                            time.sleep(2)
+                            time.sleep(1.5)
                             inventario.append('Fone do Pelicano')
                     elif numero_dado < 19 and numero_dado > 18:
                         print("Que azar! Você não encontrou nenhum item")
@@ -378,6 +385,7 @@ def main():
                             inventario.append('Papelão')
                             print('Você ganhou o estilete')
                             print('Dano recebe +2 pontos')
+                            time.sleep(2)
                             print('Você ganhou um escudo de papelão')
                             print('Recebe -2 pontos de dano')
                             time.sleep(2)
@@ -406,17 +414,17 @@ def main():
                     time.sleep(0.5)
                     print('-caipirinha do role')
                     time.sleep(0.5)
-                    escolha = input('Vai querer tomar alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
+                    escolha = input('Vai querer tomar alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. Senão, digite ir embora. ')
                     while escolha != 'ir embora':
                         if escolha == 'litrao nosso de todo dia':
                             alcool += 1
-                            escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
+                            escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. Senão, digite ir embora. ')
                         elif escolha == 'corote do amor':
                             alcool += 1
-                            escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
+                            escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. Senão, digite ir embora. ')
                         elif escolha == 'caipirinha do role':
                             alcool +=1
-                            escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
+                            escolha = input('Vai querer tomar mais alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. Senão, digite ir embora. ')
                         else:
                             print('Não temos isso, perdeu a chance de pedir! Vai ter que ir embora.')
                             escolha == 'ir embora'
@@ -435,7 +443,7 @@ def main():
                     time.sleep(2)
                     print('Você encontrou o mapa de todas as salas!')
                     time.sleep(2)
-                    wish=input('Você deseja visualizar o mapa?')
+                    wish=input('Você deseja visualizar o mapa? ')
                     print()
                     print()
                     if wish=='sim':
@@ -444,7 +452,9 @@ def main():
                     print()
                     print()
                     print('Agora você sabe todos os caminhos')
+                    time.sleep(1)
                     print('mas...')
+                    time.sleep(1)
                     print('Sem querer, você acabou caindo no sono e acordou em um lugar aleatório')
                     
                     cenarios=['saguao','sala do raul','biblioteca','fab lab','sujinhuus']
@@ -467,6 +477,45 @@ def main():
     if ganhou==True:
         print('PARABÉNS!Você derrotou o Raul e se salvou da DP!')
     else:
+        time.sleep(0.4)
+        print('███████████████████████████')
+        time.sleep(0.4)
+        print('███████▀▀▀░░░░░░░▀▀▀███████')
+        time.sleep(0.4)
+        print('████▀░░░░░░░░░░░░░░░░░▀████')
+        time.sleep(0.4)
+        print('███│░░░░░░░░░░░░░░░░░░░│███')
+        time.sleep(0.4)
+        print('██▌│░░░░░░░░░░░░░░░░░░░│▐██')
+        time.sleep(0.4)
+        print('██░└┐░░░░░░░░░░░░░░░░░┌┘░██')
+        time.sleep(0.4)
+        print('██░░└┐░░░░░░░░░░░░░░░┌┘░░██')
+        time.sleep(0.4)
+        print('██░░┌┘▄▄▄▄▄░░░░░▄▄▄▄▄└┐░░██')
+        time.sleep(0.4)
+        print('██▌░│██████▌░░░▐██████│░▐██')
+        time.sleep(0.4)
+        print('███░│▐███▀▀░░▄░░▀▀███▌│░███')
+        time.sleep(0.4)
+        print('██▀─┘░░░░░░░▐█▌░░░░░░░└─▀██')
+        time.sleep(0.4)
+        print('██▄░░░▄▄▄▓░░▀█▀░░▓▄▄▄░░░▄██')
+        time.sleep(0.4)
+        print('████▄─┘██▌░░░░░░░▐██└─▄████')
+        time.sleep(0.4)
+        print('█████░░▐█─┬┬┬┬┬┬┬─█▌░░█████')
+        time.sleep(0.4)
+        print('████▌░░░▀┬┼┼┼┼┼┼┼┬▀░░░▐████')
+        time.sleep(0.4)
+        print('█████▄░░░└┴┴┴┴┴┴┴┘░░░▄█████')
+        time.sleep(0.4)
+        print('███████▄░░░░░░░░░░░▄███████')
+        time.sleep(0.4)
+        print('██████████▄▄▄▄▄▄▄██████████')
+        time.sleep(0.4)
+        print('███████████████████████████')
+        print()
         print('Você perdeu :(')
         print('Nos vemos na DP!')
          
