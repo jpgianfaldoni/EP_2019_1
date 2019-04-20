@@ -21,6 +21,62 @@ def rng():
 class Stats:    
     vida = 100
     
+    def combate_raul(self):
+        vidaraul = 100
+        while vidaraul > 0 and self.vida > 0:
+            print("Voce encontrou seu ultimo desafio: Raul, o Mestre do Python")
+            time.sleep(0.5)
+            print("Não há escapatória, DP não é mais uma opção, lutem até a MORTE!")
+            dano_no_monstro = rng() # dano causado pelo jogador
+            if dano_no_monstro == 10: ## Acerto critico
+                print("Acerto critico! Pena que o Mestre do Pytho não leva dano extra...")
+                vidaraul = vidaraul - dano_no_monstro
+            else:
+                if "Estilete" in inventario:
+                    dano_no_monstro += 2
+                    vidaraul = vidaraul - dano_no_monstro
+                    dano_no_jogador = rng() # dano causado pelo monstro
+                if "Fone do Pelicano" in inventario:
+                    dano_no_jogador = 0
+                elif "Papelao" in inventario and dano_no_jogador >= 2:
+                    dano_no_jogador = dano_no_jogador - 2
+                    self.vida = self.vida - dano_no_jogador
+                if self.vida < 0:
+                    self.vida = 0
+                    print("Você levou",dano_no_jogador, "de dano e está com", self.vida, "de vida")
+                    time.sleep(0.5)
+                if vidaraul <= 0: ## nao deixa vida do monstro ser menor que 0
+                    vidaraul = 0
+                    print("Você venceu!") 
+        time.sleep(0.5)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     ## Funcao do combate
     def combate(self): 
         vidamonstro = 20 ## Como sao diferentes monstros a vida reseta cada vez q roda a funcao
