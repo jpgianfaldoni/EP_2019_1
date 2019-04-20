@@ -15,23 +15,26 @@ from PIL import Image
 inventario = []
 
 
-## Funcao Random Number Generation
-def rng():
-    rng = random.randint(0, 10)
-    return rng
+
 
 
 class Stats:    
     vida = 100
+    dano = 10
+    
+    def rng(self):
+        rng = random.randint(0, self.dano)
+        return rng
+
     
     def combate_raul(self): 
         vidaraul = 50 
-        if rng() > 0:
+        if self.rng() > 0:
             print("Voce encontrou seu ultimo desafio: Raul, o Mestre do Python")
             time.sleep(0.5)
             print("Não há escapatória, DP não é mais uma opção, lutem até a MORTE!")
             while vidaraul > 0 and self.vida > 0:
-                dano_no_monstro = rng() # dano causado pelo jogador
+                dano_no_monstro = self.rng() # dano causado pelo jogador
                 if dano_no_monstro == 10: ## Acerto critico
                     print("Acerto critico! Pena que o mestre do python é imune a dano extra..")
                     vidaraul = vidaraul - dano_no_monstro
@@ -39,7 +42,7 @@ class Stats:
                     if "Estilete" in inventario:
                         dano_no_monstro += 2
                     vidaraul = vidaraul - dano_no_monstro
-                    dano_no_jogador = rng() # dano causado pelo monstro
+                    dano_no_jogador = random.randint(0, 10) # dano causado pelo monstro
                     if "Fone do Pelicano" in inventario:
                         dano_no_jogador = 0
                     elif "Papelao" in inventario and dano_no_jogador >= 2:
@@ -63,17 +66,17 @@ class Stats:
     ## Funcao do combate
     def combate(self): 
         vidamonstro = 20 ## Como sao diferentes monstros a vida reseta cada vez q roda a funcao
-        if rng() > 3:
+        if self.rng() > 3:
             print("Você encontrou um monstro!")
             decisao = input("Você quer lutar ou correr?:")
         
         
         ## Sistema de fuga
             while decisao == "correr" and self.vida > 0:
-                if rng() < 1: ## % de chance de conseguir fugir
+                if self.rng() < 1: ## % de chance de conseguir fugir
                     print("Can't escape!")
                     time.sleep(0.5)
-                    dano_no_jogador = rng() ## dano do mostro se nao conseguir fugir
+                    dano_no_jogador = random.randint(0, 10) ## dano do mostro se nao conseguir fugir
                     if "Fone do Pelicano" in inventario:
                         dano_no_jogador = 0
                     elif "Papelao" in inventario:
@@ -93,7 +96,7 @@ class Stats:
         ## Sistema de luta    
             if decisao == "lutar":
                 while vidamonstro > 0 and self.vida > 0:
-                    dano_no_monstro = rng() # dano causado pelo jogador
+                    dano_no_monstro = self.rng() # dano causado pelo jogador
                     if dano_no_monstro == 10: ## Acerto critico
                         print("Acerto critico! você causou" ,dano_no_monstro * 2, 
                               "de dano no monstro!")
@@ -102,7 +105,7 @@ class Stats:
                         if "Estilete" in inventario:
                             dano_no_monstro += 2
                         vidamonstro = vidamonstro - dano_no_monstro
-                        dano_no_jogador = rng() # dano causado pelo monstro
+                        dano_no_jogador = random.randint(0, 10) # dano causado pelo monstro
                         if "Fone do Pelicano" in inventario:
                             dano_no_jogador = 0
                         elif "Papelao" in inventario and dano_no_jogador >= 2:
@@ -114,10 +117,17 @@ class Stats:
                         time.sleep(0.5)
                         if vidamonstro <= 0: ## nao deixa vida do monstro ser menor que 0
                             vidamonstro = 0
-                            print("Você matou o monstro!") 
-                        print("Você causou" ,dano_no_monstro, "de dano no monstro, e ele esta com", 
+                            print("Você matou o monstro e ganhou +2 de ataque!") 
+                            self.dano = self.dano + 2
+                        elif vidamonstro > 0:
+                            print("Você causou" ,dano_no_monstro, "de dano no monstro, e ele esta com", 
                               vidamonstro, "de vida")
                         time.sleep(0.5)
+        if "Mapa da DP" in inventario:
+            self.vida = self.vida - 5
+        if "Livro da Salvação" in inventario:
+            self.vida = self.vida + 5
+            
             
 
 jogador = Stats()
@@ -218,7 +228,7 @@ def main():
                 if "Mapa da DP" not in inventario:
                     inventario.append('Mapa da DP')
                     print('Você encontrou o Mapa da DP')       
-                    print('-5 de vida a cada rodada')
+                    print('-5 de vida após cada combate')
                     time.sleep(2)
                    
             elif numero_dado > 7:
@@ -330,7 +340,7 @@ def main():
                             inventario.append('Livro da Salvação')
                             print('Buscando um milagre.... e com o mapa em mãos Você encontrou o Livro da Salvação')
                             time.sleep(2.5)
-                            print('Com todo o conhecimento vindo do livro, você será premiado com +5 pontos de vida a cada rodada')
+                            print('Com todo o conhecimento vindo do livro, você será premiado com +5 pontos de vida após cada combate')
                             time.sleep(3)
                     if numero_dado <=18:
                         if 'Chave da sala do Raul' not in inventario:
