@@ -209,7 +209,7 @@ def main():
             print(itens_no_cenario('saguao'))
             numero_dado=dado()
             print('O número sorteado no dado foi',numero_dado)
-            if numero_dado<=7:
+            if numero_dado<=15:
                 if "Mapa da DP" not in inventario:
                     inventario.append('Mapa da DP')
                     print('Você encontrou o Mapa da DP')       
