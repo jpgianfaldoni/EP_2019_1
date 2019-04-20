@@ -1,0 +1,1 @@
+{"saguao": "cenario1", "sala do raul": "cenario2", "biblioteca": "cenario3", "fab lab": "cenario4", "sujinhuus": "cenario5", "aquario": "cenario6"}
