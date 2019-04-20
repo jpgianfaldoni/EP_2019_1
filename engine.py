@@ -9,6 +9,8 @@ import random
 import time
 import json
 from pprint import pprint
+from PIL import Image
+
 
 
 inventario = []
@@ -212,6 +214,10 @@ def main():
                     inventario.append('Mapa da DP')
                     print('Você encontrou o Mapa da DP')       
                     print('-5 de vida a cada rodada')
+                    wish=input('Deseja visualizar o Mapa?')
+                    if wish=='sim':
+                        img=Image.open('mapa.png')
+                        img.show()
             elif numero_dado > 7:
                 print("Que azar! Você não encontrou nenhum item")
             print('''Você tem essas opções de lugares para ir: 
@@ -410,9 +416,21 @@ def main():
                     inicio=carregar_cenarios(cenarios[n])
         
         if  game_over==False:
+            if 'Mapa da DP' in inventario:
+                wish=input('Deseja visualizar o Mapa?')
+                if wish=='sim':
+                    img=Image.open('mapa.png')
+                    img.show()
+                
+                
             visualizar=input('Você quer visualizar seu inventário? ')
             if visualizar=='sim':
                 print(inventario)
+            
+            
+                
+            
+            
                                 
     if ganhou==True:
         print('PARABÉNS!Você derrotou o Raul e se salvou da DP!')
