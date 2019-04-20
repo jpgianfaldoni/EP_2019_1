@@ -205,8 +205,11 @@ def main():
             tamanho=len('Saguao')
             print('-'*tamanho)
             print('Você está no saguão do Insper')
+            time.sleep(1)
             print('Nessa sala temos esses itens:')
+            time.sleep(2)
             print(itens_no_cenario('saguao'))
+            time.sleep(2)
             numero_dado=dado()
             print('O número sorteado no dado foi',numero_dado)
             if numero_dado<=15:
@@ -214,15 +217,14 @@ def main():
                     inventario.append('Mapa da DP')
                     print('Você encontrou o Mapa da DP')       
                     print('-5 de vida a cada rodada')
-                    wish=input('Deseja visualizar o Mapa?')
-                    if wish=='sim':
-                        img=Image.open('mapa.png')
-                        img.show()
+                    time.sleep(2)
+                   
             elif numero_dado > 7:
                 print("Que azar! Você não encontrou nenhum item")
             print('''Você tem essas opções de lugares para ir: 
  1- Sujinhuus 
  2- Fab Lab''')
+            time.sleep(2)
             opcoes=input('Qual desses lugares você quer ir? ')
             if opcoes=='sujinhuus':
                 inicio=carregar_cenarios('sujinhuus')
@@ -244,8 +246,11 @@ def main():
                     tamanho=len('Saguao')
                     print('-'*tamanho)
                     print('Você está no saguão do Insper')
+                    time.sleep(2)
                     print('Nessa sala temos esses itens:')
+                    time.sleep(2)
                     print(itens_no_cenario('saguao'))
+                    time.sleep(2)
                     numero_dado=dado()
                     print('O número sorteado no dado foi', numero_dado)
                     if numero_dado <= 7:
@@ -253,11 +258,13 @@ def main():
                             inventario.append('Mapa da DP')
                             print('Você encontrou o Mapa da DP')       
                             print('-5 de vida a cada rodada')
+                            time.sleep(2)
                     elif numero_dado > 7:
                         print("Que azar! Você não encontrou nenhum item")
                     print('''Você tem essas opções de lugares para ir: 
 1- Sujinhuus 
 2- Fab Lab''')
+                    time.sleep(2)
                     opcoes=input('Qual desses lugares você quer ir? ')
                     if opcoes=='sujinhuus':
                         inicio=carregar_cenarios('sujinhuus')
@@ -273,6 +280,7 @@ def main():
                     tamanho=len('Sala do Raul')
                     print('-'*tamanho)
                     print('Você está na porta da Sala do Raul')
+                    time.sleep(2)
                     if 'Chave da sala do Raul' not in inventario:
                         print('Você não consegue entrar na Sala do Raul, ainda falta um item para ser encontrado')
                     else:
@@ -307,8 +315,11 @@ def main():
                     tamanho=len('Biblioteca')
                     print('-'*tamanho)
                     print('Você está na biblioteca do Insper')
+                    time.sleep(2)
                     print('Nessa sala temos esses itens:')
+                    time.sleep(2)
                     print(itens_no_cenario('biblioteca'))
+                    time.sleep(2)
                     numero_dado=dado()
                     print('O número sorteado no dado foi',numero_dado)
                     if 'Mapa para o livro da Salvação' in inventario:
@@ -316,10 +327,12 @@ def main():
                             inventario.append('Livro da Salvação')
                             print('Buscando um milagre.... e com o mapa em mãos Você encontrou o Livro da Salvação')
                             print('Com todo o conhecimento vindo do livro, você será premiado com +5 pontos de vida a cada rodada')
+                            time.sleep(2)
                     if numero_dado <=18:
                         if 'Chave da sala do Raul' not in inventario:
                             inventario.append('Chave da sala do Raul')
                             print('Você encontrou a chave da sala do Raul')
+                            time.sleep(2)
                             print('Use a com sabedoria')
                     if numero_dado>=19:
                         if 'Fone do Pelicano' not in inventario:
@@ -327,6 +340,7 @@ def main():
                             print('Você encontrou o Fone do Pelicano')
                             print('Agora você está mais forte do que o GOKU!')
                             print('Você está IMORTAL')
+                            time.sleep(2)
                             inventario.append('Fone do Pelicano')
                     elif numero_dado < 19 and numero_dado > 18:
                         print("Que azar! Você não encontrou nenhum item")
@@ -351,8 +365,11 @@ def main():
                     tamanho=len('Fab Lab')
                     print('-'*tamanho)
                     print('Você está no Fab Lab do Insper')
+                    time.sleep(2)
                     print('Nessa sala temos esses itens:')
+                    time.sleep(2)
                     print(itens_no_cenario('fab lab'))
+                    time.sleep(2)
                     numero_dado=dado()
                     print('O número sorteado no dado foi',numero_dado)
                     if numero_dado>=7:
@@ -363,6 +380,7 @@ def main():
                             print('Dano recebe +2 pontos')
                             print('Você ganhou um escudo de papelão')
                             print('Recebe -2 pontos de dano')
+                            time.sleep(2)
                     if numero_dado < 7:
                         print("Que azar! Você não encontrou nenhum item")
                     print('''Você tem essas opções de lugares para ir:
@@ -381,9 +399,13 @@ def main():
                     print()
                     print()
                     print('Bem vindo ao Sujinhuus! Vamos te apresentar as nossas opções de bebida:')
+                    time.sleep(2)
                     print('-litrão nosso de todo dia')
+                    time.sleep(0.5)
                     print('-corote do amor')
+                    time.sleep(0.5)
                     print('-caipirinha do role')
+                    time.sleep(0.5)
                     escolha = input('Vai querer tomar alguma coisa ou ir embora? Se quiser algo, digite o nome da bebida. ')
                     while escolha != 'ir embora':
                         if escolha == 'litrao nosso de todo dia':
@@ -410,17 +432,27 @@ def main():
                     tamanho=len('Aquário')
                     print('-'*tamanho)
                     print('Por algum motivo desconhecido, você deu sorte de encontrar um aquário vazio na biblioteca')
+                    time.sleep(2)
+                    print('Você encontrou o mapa de todas as salas!')
+                    time.sleep(2)
+                    wish=input('Você deseja visualizar o mapa?')
+                    print()
+                    print()
+                    if wish=='sim':
+                        img=Image.open('mapa.png')
+                        img.show()
+                    print()
+                    print()
+                    print('Agora você sabe todos os caminhos')
+                    print('mas...')
                     print('Sem querer, você acabou caindo no sono e acordou em um lugar aleatório')
+                    
                     cenarios=['saguao','sala do raul','biblioteca','fab lab','sujinhuus']
                     n=random.randint(0,4)
                     inicio=carregar_cenarios(cenarios[n])
         
         if  game_over==False:
-            if 'Mapa da DP' in inventario:
-                wish=input('Deseja visualizar o Mapa?')
-                if wish=='sim':
-                    img=Image.open('mapa.png')
-                    img.show()
+            
                 
                 
             visualizar=input('Você quer visualizar seu inventário? ')
