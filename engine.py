@@ -214,7 +214,9 @@ def main():
                     print('-5 de vida a cada rodada')
             elif numero_dado > 7:
                 print("Que azar! Você não encontrou nenhum item")
-            print('''Você tem essas opções de lugares para ir: 1- Sujinhuus 2- Fab Lab''')
+            print('''Você tem essas opções de lugares para ir: 
+ 1- Sujinhuus 
+ 2- Fab Lab''')
             opcoes=input('Qual desses lugares você quer ir? ')
             if opcoes=='sujinhuus':
                 inicio=carregar_cenarios('sujinhuus')
@@ -247,7 +249,9 @@ def main():
                             print('-5 de vida a cada rodada')
                     elif numero_dado > 7:
                         print("Que azar! Você não encontrou nenhum item")
-                    print('''Você tem essas opções de lugares para ir: 1- Sujinhuus 2- Fab Lab''')
+                    print('''Você tem essas opções de lugares para ir: 
+1- Sujinhuus 
+2- Fab Lab''')
                     opcoes=input('Qual desses lugares você quer ir? ')
                     if opcoes=='sujinhuus':
                         inicio=carregar_cenarios('sujinhuus')
@@ -266,7 +270,7 @@ def main():
                     if 'Chave da sala do Raul' not in inventario:
                         print('Você não consegue entrar na Sala do Raul, ainda falta um item para ser encontrado')
                     else:
-                        resposta = input('Voce tem certeza que quer entrar? Pode ser um caminho sem volta(sim/nao) ')
+                        resposta = input('Tem certeza que quer entrar? Pode ser um caminho sem volta (sim/nao):')
                         if resposta == "sim":
                             jogador.combate_raul()
                             if jogador.vida > 0:
@@ -275,9 +279,13 @@ def main():
                                 game_over = True
                             break
                         else:
-                            print('''Você tem essas opções de lugares para ir: 1- Sujinhuus 2- Fab Lab''')
+                            print('''Você tem essas opções de lugares para ir: 
+1- Sujinhuus 
+2- Fab Lab''')
                             opcoes=input('Qual desses lugares você quer ir? ')
-                    print('''Você tem essas opções de lugares para ir: 1- Fab Lab 2- Biblioteca''')
+                    print('''Você tem essas opções de lugares para ir: 
+1- Fab Lab 
+2- Biblioteca''')
                     opcoes=input('Qual desses lugares você quer ir? ')
                     if opcoes=='fab lab':
                         inicio=carregar_cenarios('fab lab')
@@ -316,7 +324,10 @@ def main():
                             inventario.append('Fone do Pelicano')
                     elif numero_dado < 19 and numero_dado > 18:
                         print("Que azar! Você não encontrou nenhum item")
-                    print('Você tem essas opções de lugares para ir: 1- Sala do Raul 2- Fab Lab 3- Aquário')
+                    print('''Você tem essas opções de lugares para ir: 
+1- Sala do Raul 
+2- Fab Lab
+3- Aquario''')
                     opcoes=input('Qual desses lugares você quer ir?  ')
                     if opcoes=='sala do raul':
                         inicio=carregar_cenarios('sala do raul')
@@ -348,7 +359,9 @@ def main():
                             print('Recebe -2 pontos de dano')
                     if numero_dado < 7:
                         print("Que azar! Você não encontrou nenhum item")
-                    print('''Você tem essas opções de lugares para ir: 1- Biblioteca 2- Sala do Raul''')
+                    print('''Você tem essas opções de lugares para ir:
+1- Biblioteca
+2- Sala do Raul''')
                     opcoes=input('Qual desses lugares você quer ir? ')
                     if opcoes=='biblioteca':
                         inicio=carregar_cenarios('biblioteca')
