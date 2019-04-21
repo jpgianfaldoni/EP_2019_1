@@ -485,6 +485,22 @@ def main():
             
                                 
     if ganhou==True:
+        print('                                 _')
+        time.sleep(0.4)
+        print('                                | |')
+        time.sleep(0.4)
+        print('  ___ ___  _ __   __ _ _ __ __ _| |_ ___ ')
+        time.sleep(0.4)
+        print(' / __/ _ \|  _ \ / _  |  __/ _  | __/ __|')
+        time.sleep(0.4)
+        print('| |_| |_| | | | | |_| | | | |_| | |_\__ \ ')
+        time.sleep(0.4)
+        print(' \___\___/|_| |_|\__, |_|  \__,_|\__|___/')
+        time.sleep(0.4)
+        print('                  __/ |')
+        time.sleep(0.4)
+        print('                 |___/ ')
+        time.sleep(0.4)
         print('PARABÉNS!Você derrotou o Raul e se salvou da DP!')
     else:
         time.sleep(0.4)
