@@ -25,5 +25,10 @@ Features Implementadas:
 -Feature 5) Arquivos: As funções que carregam cenários e itens acessam arquivos .txt que são transformados em dicionários por meio do JSON.
 
 
-(Não finalizado) -Feature Extra 1) Imagem .png: Em um dos cenários é possível acessar uma imagem .png do mapa do jogo que mostra a localização de todos os itens.
+Feature Extra 1) Imagem .png: Em um dos cenários é possível acessar uma imagem .png do mapa do jogo que mostra a localização de todos os itens.
+
+Feature Extra 2) Print de ASCII Art no final do jogo.
+
+Feature Extra 3) Integração de itens com as funções de combate, e recompensa por vencer combates.
+
 
